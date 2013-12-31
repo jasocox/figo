@@ -1,9 +1,14 @@
 package queue
 
-type Queue interface {}
+type Queue interface {
+  Push(interface{})
+}
 
-type q struct {}
+type queue struct {}
 
 func New() Queue {
-  return q{}
+  return queue{}
+}
+
+func (q queue) Push(o interface{}) {
 }
