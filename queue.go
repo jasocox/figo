@@ -1,6 +1,9 @@
 package queue
 
-import "container/list"
+import (
+  "container/list"
+  "sync"
+)
 
 type Queue interface {
   Push(interface{})
@@ -11,17 +14,24 @@ type Queue interface {
 
 type queue struct {
   l *list.List
+  lock sync.Mutex
 }
 
 func New() Queue {
-  return queue{list.New()}
+  return queue{l: list.New()}
 }
 
 func (q queue) Push(o interface{}) {
+  q.lock.Lock()
+  defer q.lock.Unlock()
+
   q.l.PushBack(o)
 }
 
 func (q queue) Pop() interface{} {
+  q.lock.Lock()
+  defer q.lock.Unlock()
+
   e := q.l.Front()
   if e == nil {
     return nil
