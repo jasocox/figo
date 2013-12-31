@@ -4,6 +4,7 @@ type Queue interface {
   Push(interface{})
   Pop() interface{}
   IsEmpty() bool
+  Len() int
 }
 
 type queue struct {}
@@ -21,4 +22,8 @@ func (q queue) Pop() interface{} {
 
 func (q queue) IsEmpty() bool {
   return true
+}
+
+func (q queue) Len() int {
+  return 0
 }

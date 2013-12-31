@@ -20,3 +20,8 @@ func Test_CanIsEmpty(t *testing.T) {
   q := New()
   _ = q.IsEmpty()
 }
+
+func Test_CanLen(t *testing.T) {
+  q := New()
+  _ = q.Len()
+}
