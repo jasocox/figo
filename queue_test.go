@@ -15,3 +15,8 @@ func Test_CanPop(t *testing.T) {
   q := New()
   _ = q.Pop()
 }
+
+func Test_CanIsEmpty(t *testing.T) {
+  q := New()
+  _ = q.IsEmpty()
+}
