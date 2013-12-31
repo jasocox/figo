@@ -10,3 +10,8 @@ func Test_CanPush(t *testing.T) {
   q := New()
   q.Push("Nada")
 }
+
+func Test_CanPop(t *testing.T) {
+  q := New()
+  _ = q.Pop()
+}
