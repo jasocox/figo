@@ -31,7 +31,7 @@ func (q queue) Pop() interface{} {
 }
 
 func (q queue) IsEmpty() bool {
-  return true
+  return q.l.Len() == 0
 }
 
 func (q queue) Len() int {
