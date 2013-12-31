@@ -1,5 +1,7 @@
 package queue
 
+import "container/list"
+
 type Queue interface {
   Push(interface{})
   Pop() interface{}
@@ -7,17 +9,25 @@ type Queue interface {
   Len() int
 }
 
-type queue struct {}
+type queue struct {
+  l *list.List
+}
 
 func New() Queue {
-  return queue{}
+  return queue{list.New()}
 }
 
 func (q queue) Push(o interface{}) {
+  q.l.PushBack(o)
 }
 
 func (q queue) Pop() interface{} {
-  return nil
+  e := q.l.Front()
+  if e == nil {
+    return nil
+  }
+
+  return q.l.Remove(e)
 }
 
 func (q queue) IsEmpty() bool {
@@ -25,5 +35,5 @@ func (q queue) IsEmpty() bool {
 }
 
 func (q queue) Len() int {
-  return 0
+  return q.l.Len()
 }
