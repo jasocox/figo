@@ -25,7 +25,7 @@ func New() Queue {
   return queue{list.New()}
 }
 
-func NewAsync() Queue {
+func NewSync() Queue {
   return aqueue{q: &queue{list.New()}}
 }
 

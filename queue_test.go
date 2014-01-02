@@ -65,32 +65,32 @@ func Test_CanAddMultipleItems(t *testing.T) {
   }
 }
 
-func TestAsync(t *testing.T) {
-  _ = NewAsync()
+func TestSync(t *testing.T) {
+  _ = NewSync()
 }
 
-func TestAsync_CanPush(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanPush(t *testing.T) {
+  q := NewSync()
   q.Push("Nada")
 }
 
-func TestAsync_CanPop(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanPop(t *testing.T) {
+  q := NewSync()
   _ = q.Pop()
 }
 
-func TestAsync_CanIsEmpty(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanIsEmpty(t *testing.T) {
+  q := NewSync()
   _ = q.IsEmpty()
 }
 
-func TestAsync_CanLen(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanLen(t *testing.T) {
+  q := NewSync()
   _ = q.Len()
 }
 
-func TestAsync_CanAddOneItem(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanAddOneItem(t *testing.T) {
+  q := NewSync()
   if q.Len() != 0 {
     t.Error("Didn't get the right size")
   }
@@ -110,8 +110,8 @@ func TestAsync_CanAddOneItem(t *testing.T) {
   }
 }
 
-func TestAsync_CanAddMultipleItems(t *testing.T) {
-  q := NewAsync()
+func TestSync_CanAddMultipleItems(t *testing.T) {
+  q := NewSync()
 
   for i:=0; i<10; i++ {
     q.Push(i)
