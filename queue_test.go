@@ -65,6 +65,41 @@ func Test_CanAddMultipleItems(t *testing.T) {
   }
 }
 
+func Test_CanIterateEmptyList(t *testing.T) {
+  q := New()
+
+  i := 0
+  for elem:=q.Front(); q.Next(elem)!=nil; elem=q.Next(elem) { }
+
+  if i != 0 {
+    t.Error("Should have been empty")
+    return
+  }
+}
+
+func Test_CanIterateItems(t *testing.T) {
+  q := New()
+
+  for i:=0; i<10; i++ {
+    q.Push(i)
+  }
+
+  i := 0
+  for elem:=q.Front(); q.Next(elem)!=nil; elem=q.Next(elem) {
+    if elem.Value.(int) != i {
+      t.Error("Did not match the correct order")
+      return
+    }
+
+    i++
+  }
+
+  if i != 9 {
+    t.Error("Did not iterate the whole list")
+    return
+  }
+}
+
 func TestSync(t *testing.T) {
   _ = NewSync()
 }

@@ -10,6 +10,9 @@ type Queue interface {
   Pop() interface{}
   IsEmpty() bool
   Len() int
+
+  Front() *list.Element
+  Next(*list.Element) *list.Element
 }
 
 type queue struct {
@@ -50,6 +53,18 @@ func (q queue) Len() int {
   return q.l.Len()
 }
 
+func (q queue) Front() *list.Element {
+  return q.l.Front()
+}
+
+func (q queue) Next(e *list.Element) *list.Element {
+  if e == nil {
+    return e
+  }
+
+  return e.Next()
+}
+
 func (q aqueue) Push(o interface{}) {
   q.lock.Lock()
   defer q.lock.Unlock()
@@ -70,4 +85,12 @@ func (q aqueue) IsEmpty() bool {
 
 func (q aqueue) Len() int {
   return q.q.Len()
+}
+
+func (q aqueue) Front() *list.Element {
+  return q.q.Front()
+}
+
+func (q aqueue) Next(e *list.Element) *list.Element {
+  return q.q.Next(e)
 }
