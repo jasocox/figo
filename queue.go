@@ -5,38 +5,28 @@ import (
 	"sync"
 )
 
-type Queue interface {
-	Push(interface{})
-	Pop() interface{}
-	IsEmpty() bool
-	Len() int
-
-	Front() *list.Element
-	Next(*list.Element) *list.Element
-}
-
-type queue struct {
+type Queue struct {
 	l *list.List
 }
 
-type aqueue struct {
-	q    *queue
+type SQueue struct {
+	q    *Queue
 	lock sync.Mutex
 }
 
 func New() Queue {
-	return queue{list.New()}
+	return Queue{list.New()}
 }
 
-func NewSync() Queue {
-	return aqueue{q: &queue{list.New()}}
+func NewSync() SQueue {
+	return SQueue{q: &Queue{list.New()}}
 }
 
-func (q queue) Push(o interface{}) {
+func (q Queue) Push(o interface{}) {
 	q.l.PushBack(o)
 }
 
-func (q queue) Pop() interface{} {
+func (q Queue) Pop() interface{} {
 	e := q.l.Front()
 	if e == nil {
 		return nil
@@ -45,19 +35,19 @@ func (q queue) Pop() interface{} {
 	return q.l.Remove(e)
 }
 
-func (q queue) IsEmpty() bool {
+func (q Queue) IsEmpty() bool {
 	return q.l.Len() == 0
 }
 
-func (q queue) Len() int {
+func (q Queue) Len() int {
 	return q.l.Len()
 }
 
-func (q queue) Front() *list.Element {
+func (q Queue) Front() *list.Element {
 	return q.l.Front()
 }
 
-func (q queue) Next(e *list.Element) *list.Element {
+func (q Queue) Next(e *list.Element) *list.Element {
 	if e == nil {
 		return e
 	}
@@ -65,32 +55,32 @@ func (q queue) Next(e *list.Element) *list.Element {
 	return e.Next()
 }
 
-func (q aqueue) Push(o interface{}) {
+func (q SQueue) Push(o interface{}) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	q.q.Push(o)
 }
 
-func (q aqueue) Pop() interface{} {
+func (q SQueue) Pop() interface{} {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	return q.q.Pop()
 }
 
-func (q aqueue) IsEmpty() bool {
+func (q SQueue) IsEmpty() bool {
 	return q.q.IsEmpty()
 }
 
-func (q aqueue) Len() int {
+func (q SQueue) Len() int {
 	return q.q.Len()
 }
 
-func (q aqueue) Front() *list.Element {
+func (q SQueue) Front() *list.Element {
 	return q.q.Front()
 }
 
-func (q aqueue) Next(e *list.Element) *list.Element {
+func (q SQueue) Next(e *list.Element) *list.Element {
 	return q.q.Next(e)
 }
