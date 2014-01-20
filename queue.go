@@ -12,7 +12,7 @@ type Queue struct {
 	l *list.List
 }
 
-type SQueue struct {
+type AsyncQueue struct {
 	q    *Queue
 	lock sync.Mutex
 }
@@ -22,8 +22,8 @@ func New() Queue {
 	return Queue{list.New()}
 }
 
-func NewSync() SQueue {
-	return SQueue{q: &Queue{list.New()}}
+func NewSync() AsyncQueue {
+	return AsyncQueue{q: &Queue{list.New()}}
 }
 
 // Pushes a new item to the back of the Queue.
@@ -69,32 +69,32 @@ func (q Queue) Next(e *list.Element) *list.Element {
 	return e.Next()
 }
 
-func (q SQueue) Push(o interface{}) {
+func (q AsyncQueue) Push(o interface{}) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	q.q.Push(o)
 }
 
-func (q SQueue) Pop() interface{} {
+func (q AsyncQueue) Pop() interface{} {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	return q.q.Pop()
 }
 
-func (q SQueue) IsEmpty() bool {
+func (q AsyncQueue) IsEmpty() bool {
 	return q.q.IsEmpty()
 }
 
-func (q SQueue) Len() int {
+func (q AsyncQueue) Len() int {
 	return q.q.Len()
 }
 
-func (q SQueue) Front() *list.Element {
+func (q AsyncQueue) Front() *list.Element {
 	return q.q.Front()
 }
 
-func (q SQueue) Next(e *list.Element) *list.Element {
+func (q AsyncQueue) Next(e *list.Element) *list.Element {
 	return q.q.Next(e)
 }
