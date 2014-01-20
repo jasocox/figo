@@ -12,6 +12,7 @@ type Queue struct {
 	l *list.List
 }
 
+// A thread safe version of Queue.
 type AsyncQueue struct {
 	q    *Queue
 	lock sync.Mutex
@@ -22,6 +23,7 @@ func New() Queue {
 	return Queue{list.New()}
 }
 
+// Returns an initialized SyncQueue
 func NewSync() AsyncQueue {
 	return AsyncQueue{q: &Queue{list.New()}}
 }
@@ -69,6 +71,7 @@ func (q Queue) Next(e *list.Element) *list.Element {
 	return e.Next()
 }
 
+// Same as Push for Queue, except it is thread safe.
 func (q AsyncQueue) Push(o interface{}) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
@@ -76,6 +79,7 @@ func (q AsyncQueue) Push(o interface{}) {
 	q.q.Push(o)
 }
 
+// Same as Pop for Queue, except it is thread safe.
 func (q AsyncQueue) Pop() interface{} {
 	q.lock.Lock()
 	defer q.lock.Unlock()
@@ -83,18 +87,22 @@ func (q AsyncQueue) Pop() interface{} {
 	return q.q.Pop()
 }
 
+// Same as IsEmpty for Queue, except it is thread safe.
 func (q AsyncQueue) IsEmpty() bool {
 	return q.q.IsEmpty()
 }
 
+// Same as Len for Queue, except it is thread safe.
 func (q AsyncQueue) Len() int {
 	return q.q.Len()
 }
 
+// Same as Front for Queue, except it is thread safe.
 func (q AsyncQueue) Front() *list.Element {
 	return q.q.Front()
 }
 
+// Same as Next for Queue, except it is thread safe.
 func (q AsyncQueue) Next(e *list.Element) *list.Element {
 	return q.q.Next(e)
 }
