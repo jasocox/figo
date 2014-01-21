@@ -1,6 +1,6 @@
 // Package queue is a FIFO queue using the circularly linked list package in
 // Go's standard library. There is also a thread safe version.
-package queue
+package figo
 
 import (
 	"container/list"

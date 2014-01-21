@@ -13,7 +13,7 @@ only use it if you need it.
 Example Usage
 =============
 
-	q := queue.New()
+	q := figo.New()
 	q.Push(1)
 	q.Push(2)
 	
@@ -26,4 +26,4 @@ Example Usage
 
 To make a thread safe version:
 
-	q := queue.NewAsync()
+	q := figo.NewAsync()

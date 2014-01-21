@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/jasocox/queue"
+	"github.com/jasocox/figo"
 )
 
 const SIZE = 10
 
 func main() {
-	q := queue.New()
+	q := figo.New()
 
 	fmt.Printf("Is empty: %t\n", q.IsEmpty())
 
