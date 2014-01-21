@@ -25,4 +25,5 @@ Example Usage
 	q.Pop()
 
 To make a thread safe version:
+
 	q := queue.NewAsync()
