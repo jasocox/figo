@@ -2,7 +2,7 @@ figo - A FIFO queue for Go
 ==========================
 
 `figo` is a FIFO for Go (Thanks
-[@Corey_latislaw](https://twitter.com/corey_latislaw) for the name!). It is
+[@Corey_Latislaw](https://twitter.com/corey_latislaw) for the name!). It is
 possible to iterate through the queue, if necessary.
 
 There is additionally a thread safe version. Since it adds a bit of overhead,
