@@ -12,7 +12,8 @@ only use it if you need it.
 
 Example Usage
 =============
-
+	import "github.com/jasocox/figo"
+	
 	q := figo.New()
 	q.Push(1)
 	q.Push(2)
@@ -27,3 +28,7 @@ Example Usage
 To make a thread safe version:
 
 	q := figo.NewAsync()
+
+Documentation
+=============
+Can be found here: [godocs](http://godoc.org/github.com/jasocox/figo)
