@@ -39,7 +39,7 @@ func (q Queue) Pop() interface{} {
 	if e == nil {
 		return nil
 	}
-
+	q.Push(e.Value)
 	return q.l.Remove(e)
 }
 
