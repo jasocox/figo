@@ -39,7 +39,7 @@ func (q Queue) Pop() interface{} {
 	if e == nil {
 		return nil
 	}
-
+//	q.Push(e.Value)
 	return q.l.Remove(e)
 }
 
@@ -83,7 +83,11 @@ func (q AsyncQueue) Push(o interface{}) {
 func (q AsyncQueue) Pop() interface{} {
 	q.lock.Lock()
 	defer q.lock.Unlock()
-
+	e := q.q.l.Front()
+		if e == nil {
+		return nil
+	}
+	q.Push(e.Value)
 	return q.q.Pop()
 }
 
